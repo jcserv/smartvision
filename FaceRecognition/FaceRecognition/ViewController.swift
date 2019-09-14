@@ -8,6 +8,8 @@
 
 import UIKit
 import Vision
+import AVFoundation
+import Foundation
 
 class ViewController: UIViewController {
 
@@ -36,7 +38,7 @@ class ViewController: UIViewController {
             req.results?.forEach({ (res) in
                 
                 DispatchQueue.main.async {
-                    guard let faceObservation = res as? VNFaceObservation else { return }
+                    guard let faceObservation = res as? VNDetectedObjectObservation else { return }
                     
                     let x = self.view.frame.width * faceObservation.boundingBox.origin.x
                     
@@ -54,6 +56,16 @@ class ViewController: UIViewController {
                     self.view.addSubview(redView)
                     
                     print(faceObservation.boundingBox)
+                    speak("hello")
+
+                    let recognized_faces = readJSONFromFile("./persons.json")
+
+                    for person in recognized_faces {
+                        if (person != null && person.width == width && person.height == height) {
+                            speak(person.label)
+                        }   
+                    }
+
                 }
             })
         }
@@ -71,6 +83,26 @@ class ViewController: UIViewController {
         
     }
 
+    func speak(message: String) {
+        var speechUtterance: AVSpeechUtterance = AVSpeechUtterance(message)
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        speechSynthesizer.speakUtterance(speechUtterance)
+    }
+
+    func readJSONFromFile(fileName: String) -> Any? {
+      var json: Any?
+      if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+          do {
+              let fileUrl = URL(fileURLWithPath: path)
+              // Getting data from JSON file using the file URL
+              let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+              json = try? JSONSerialization.jsonObject(with: data)
+          } catch {
+              return
+          }
+      }
+      return json
+  }
 }
 
 

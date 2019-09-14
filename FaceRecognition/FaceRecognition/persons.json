@@ -1,0 +1,18 @@
+{
+    "persons": [
+        {"label": "Kylie Jenner",
+        "width": 0.3602233827114105,
+        "height": 0.6399572491645813
+        },
+
+        {"label": "Barack Obama",
+        "width": 0.0936911663144455,
+        "height": 0.08779626339673996
+        },
+        
+        {"label": "Dalai Lama",
+        "width": 375,
+        "height": 375}
+    ]
+
+}
