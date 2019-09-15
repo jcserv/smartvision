@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  FaceRecognition
+//  HTN'19
 //
-//  Created by Brian Voong on 7/7/17.
-//  Copyright © 2017 Lets Build That App. All rights reserved.
+//  Created by Pavitra Kurseja on 2019-09-14.
+//  Copyright © 2019 Pavitra Kurseja. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }
