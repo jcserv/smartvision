@@ -8,6 +8,8 @@
 
 import UIKit
 import Vision
+import AVFoundation
+import Foundation
 
 class ViewController: UIViewController,
     UIImagePickerControllerDelegate,
@@ -38,7 +40,7 @@ class ViewController: UIViewController,
 //    {
 //        if press.state = .began
 //        { }
-//    }
+//    
     // Callback function for what happens in your main view
     // controller after the photo library view controller returns
     // after you picked an image.
@@ -103,4 +105,25 @@ class ViewController: UIViewController,
             }
         }
     }
+
+    func speak(message: String) {
+        var speechUtterance: AVSpeechUtterance = AVSpeechUtterance(message)
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        speechSynthesizer.speakUtterance(speechUtterance)
+    }
+
+    func readJSONFromFile(fileName: String) -> Any? {
+      var json: Any?
+      if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+          do {
+              let fileUrl = URL(fileURLWithPath: path)
+              // Getting data from JSON file using the file URL
+              let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+              json = try? JSONSerialization.jsonObject(with: data)
+          } catch {
+              return
+          }
+      }
+      return json
+  }
 }
