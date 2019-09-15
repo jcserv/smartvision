@@ -11,7 +11,10 @@ import Vision
 import AVFoundation
 import Foundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate {
+
+    @IBOutlet weak var myButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +85,28 @@ class ViewController: UIViewController {
         }
         
     }
+
+    func photoLibrary()
+    {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self;
+            myPickerController.sourceType = .photoLibrary //.camera
+            self.present(myPickerController, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func openCamera(_ sender: Any) {
+        photoLibrary()
+    }
+
+//    func launchcamera(press:UILongPressGestureRecognizer)
+//    {
+//        if press.state = .began
+//        { }
+//    }
+    
 
     func speak(message: String) {
         var speechUtterance: AVSpeechUtterance = AVSpeechUtterance(message)
